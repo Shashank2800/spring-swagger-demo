@@ -1,0 +1,26 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout') {
+            steps {
+                // This clones your code from GitHub
+                checkout scm
+            }
+        }
+
+        stage('Build') {
+            steps {
+                // Compiles your Java app and creates a JAR/WAR file
+                sh 'mvn -B -DskipTests clean package'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                // Runs your unit tests
+                sh 'mvn test'
+            }
+        }
+    }
+}
