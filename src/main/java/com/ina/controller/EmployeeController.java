@@ -1,24 +1,20 @@
 package com.ina.controller;
 
 import com.ina.model.Employee;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
+@Slf4j
 @RestController
 public class EmployeeController {
 
     private List<Employee> employees = createList();
 
-    @RequestMapping(value = "/employees", method = RequestMethod.GET, produces = "application/json")
+    @GetMapping(value = "/employees", produces = "application/json")
     public List<Employee> firstPage() {
         return employees;
     }
@@ -39,7 +35,7 @@ public class EmployeeController {
     @PostMapping
     public Employee create(@RequestBody Employee user) {
         employees.add(user);
-        System.out.println(employees);
+        log.info("employees : {}",employees);
         return user;
     }
 
